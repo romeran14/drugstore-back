@@ -45,10 +45,11 @@ router.get("/factura/:idFact", (req, res) => {
   const idFact = req.params.idFact
   let productos = [];
   
-  db.query("SELECT facturas.idCLiente, facturas.fecha, facturas.idProd, facturas.cantidadProd, productos.nombreProducto, productos.precioProducto, clientes.nombreCliente, clientes.cedulaCliente FROM facturas INNER JOIN productos ON facturas.idProd = productos.idProducto INNER JOIN clientes ON facturas.idCLiente = clientes.idCliente WHERE idfactura=?;",[idFact], (err, results) => {
+  db.query("SELECT facturas.idCLiente, facturas.fecha, facturas.idProd, facturas.cantidadProd, productos.nombreProducto, productos.precioProducto, clientes.nombreCliente, clientes.cedulaCliente FROM facturas INNER JOIN productos ON facturas.idProd = productos.idProducto INNER JOIN clientes ON facturas.idCLiente = clientes.idCliente WHERE idfactura=?; SELECT * from clientes ORDER BY idCliente DESC LIMIT 1;  ",[idFact], (err, results) => {
     if (err) {
       console.log('err',err);
     }
+    console.log(results)
     res.send(results)
   });
 })
