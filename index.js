@@ -6,7 +6,7 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
-
+const disconectDb = require('./utils/disconectDb')
 const PORT = process.env.PORT || 3001;
 const CLIENT_PORT = process.env.CLIENT_PORT
 const SECRET = process.env.SECRET
@@ -45,3 +45,5 @@ app.use('/upload', uploadRoute);
 app.listen(PORT, (req, res) => {
    console.log(`Server running on ${PORT}..`)
 });
+
+disconectDb()
